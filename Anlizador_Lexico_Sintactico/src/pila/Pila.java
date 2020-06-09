@@ -9,7 +9,7 @@ public class Pila {
         inicio = fin = null;
     }
 
-    public void push(String s) {
+    public void push(String s) { //colocar en la pila 
         Nodo nuevo = new Nodo();
         nuevo.dato = s;
 
@@ -18,7 +18,7 @@ public class Pila {
 
     }
 
-    public void showStack() {
+    public void showStack() { //mostrar todo lo que hay en la pila
         Nodo actual;
         actual = inicio;
         if (inicio != null) {
@@ -35,13 +35,13 @@ public class Pila {
 
     }
     
-    public boolean empty(){
+    public boolean empty(){ //comprobar si hay algun elemento en la pila
         if(inicio == null)
             return true;
         else return false;
     }
 
-    public String peek() {
+    public String peek() {//retornar el dato del ultimo elemento añadido a la pila
 
         Nodo actual;
         actual = inicio;
@@ -56,7 +56,7 @@ public class Pila {
         return actual.dato;
     }
     
-    public void pop(){
+    public void pop(){//quitar el ultimo elemento añadido a la pila
         
         Nodo actual;
         actual = inicio;

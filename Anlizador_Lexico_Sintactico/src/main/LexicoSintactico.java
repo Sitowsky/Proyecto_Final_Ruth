@@ -8,7 +8,7 @@ import java.io.IOException;
 public class LexicoSintactico {
 
     public static void main(String[] args)throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src/recursos/Cadena.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("src/recursos/Cadena.txt")); //leer el programa a probar
         String line;
         String cadena = "";
         while((line = br.readLine()) != null){

@@ -36,24 +36,26 @@ public class Analizador_Sintactico {
 
     private void LLDriver() {
 
-        Pila pila = new Pila();               
-        String a = n.tokenizer(cadena, n.getI());
-        pila.push("inicio");
-        String x = pila.peek();
+        Pila pila = new Pila();      //instanciamos nuestra pila         
+        String a = n.tokenizer(cadena, n.getI()); //a sera nuestros tokens de la cadena a probar
+        pila.push("inicio"); //colocamos a la pila la produccion inicial 
+        String x = pila.peek(); //x sera nuestro ultimo dato ingresado a la pila
 
-        while (!pila.empty()) {
+        while (!pila.empty()) { //mientras la pila no este vacia
 
-            System.out.println("x = " + x + ", a = " + a);
-            pila.showStack();
-            if (isInArray(x, ag.getNoTerminales())) {
-                System.out.println(getRow(x) + ", " + getColumn(a));
+            System.out.println("x= " + x + ",  a= " + a);
+            pila.showStack();//mostrar lo que tiene la pila
+            
+            if (isInArray(x, ag.getNoTerminales())) {//si "x" esta en los terminales
+                System.out.println(getRow(x) + ", " + getColumn(a));//pocisiones de la matriz 
                 if (tabla[getRow(x)][getColumn(a)] != 0) {
-                    pila.pop();
-
+                    pila.pop(); //quitamos el ultimo elemento añadido a la pila,
+                                //ej: en la primer iteracion es "inicio" , para añadir la derivacion de este. 
                     String[] aux = ag.getDerivaciones()[tabla[getRow(x)][getColumn(a)] - 1].split(" ");
                     for (int m = aux.length - 1; m >= 0; m--) {
                         if (!"".equals(aux[m])) {
-                            pila.push(aux[m]);
+                            pila.push(aux[m]);//colocaremos las derivaciones de la produccion
+                                                //ej: en la primer iteracion seria "programa program"
                         }
                     }
                 } else {
@@ -62,9 +64,9 @@ public class Analizador_Sintactico {
                 }
             } else {
 
-                if (isInArray(x, ag.getTerminales())) {
-                    pila.pop();
-                    a = n.tokenizer(cadena, n.getI());
+                if (isInArray(x, ag.getTerminales())) {//verificaremos si el token es un terminal 
+                    pila.pop();//si es terminal lo retiramos de la pila
+                    a = n.tokenizer(cadena, n.getI()); //volvemos a llamar ahora el siguiente token
                 } else {
                     System.out.println("Error sintactico en x = " + x + " y a = " + a);
                     System.exit(0);
@@ -76,6 +78,7 @@ public class Analizador_Sintactico {
             } else {
                 x = pila.peek();
             }
+            System.out.println("------------------------");
         }
 
     }
