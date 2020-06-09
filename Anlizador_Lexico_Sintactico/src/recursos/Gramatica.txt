@@ -1,0 +1,15 @@
+1. inicio ->program programa
+2. programa ->begin stmt_list end
+3. stmt_list -> 
+4. stmt_list ->stmt stmt_list
+5. stmt ->id := expression ;
+6. expression ->primary primarytail
+7. primarytail ->aritop primary primarytail
+8. primarytail ->
+9. primary ->( expression )
+10. primary ->id
+11. primary ->intliteral
+12. primary ->realliteral
+13. aritop ->+
+14. aritop ->-
+15. aritop ->*
