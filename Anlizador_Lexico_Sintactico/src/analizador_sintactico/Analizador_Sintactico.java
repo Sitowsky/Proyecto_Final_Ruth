@@ -36,12 +36,10 @@ public class Analizador_Sintactico {
 
     private void LLDriver() {
 
-        Pila pila = new Pila();
-
-        pila.push(ag.getDerivaciones()[0]);
-        String x = pila.peek();
-
+        Pila pila = new Pila();               
         String a = n.tokenizer(cadena, n.getI());
+        pila.push("inicio");
+        String x = pila.peek();
 
         while (!pila.empty()) {
 

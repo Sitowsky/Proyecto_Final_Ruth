@@ -17,12 +17,10 @@ public class AnalizadorDeGramatica {
     public void analizar() {//
         try {
             BufferedReader bf = new BufferedReader(new FileReader("src/recursos/Gramatica.txt"));//Leer el archivo
-            String line;//aqui se guardara en String, por cada linea 
-            int length = 0, derivacionesLength = 0; 
+            String line;
+            int length = 0;
             while ((line = bf.readLine()) != null) {//Empezamos a leer hasta que se termine el archivo para saber el numero de lineas
                 length++;
-//                if(line.split("->").length > 1)
-//                    derivacionesLength++;
             }
 
             bf = new BufferedReader(new FileReader("src/recursos/Gramatica.txt")); //Volvemos a instanciar para que regrese el puntero al inicio
@@ -31,11 +29,11 @@ public class AnalizadorDeGramatica {
             derivaciones = new String[length];//parte derecha
             String[] aux1 = new String[length];
             String[] derivantes = new String[length]; //parte izquierda
-            
+
             for (int i = 0; (line = bf.readLine()) != null; i++) { //For porque ya sabemos el numero delineas que tiene el archivo
                 producciones[i] = line;
                 aux1[i] = line.split("->")[0];//split para poder guaradar las producciones 
-                String line2 = aux1[i];               
+                String line2 = aux1[i];
                 derivantes[i] = line2.split(" ")[1];
                 if (line.split("->").length > 1) {
                     derivaciones[i] = line.split("->")[1];//split para poder guaradar lo que viene despues de la derivación
@@ -71,14 +69,11 @@ public class AnalizadorDeGramatica {
 
             z = 0;
             terminales = new String[terminalesSet.size()];
-            for (String s : terminalesSet) {               
+            for (String s : terminalesSet) {
                 terminales[z] = s;//Pasamos la información contenida del arrayList al array estatico
                 z++;
             }
 
-//            for (String produccione : producciones) {
-//                System.out.println(produccione);
-//            }
             System.out.println("");
             System.out.println("Derivaciones(Lado derecho)");
             for (String derivacione : derivaciones) {
@@ -110,19 +105,20 @@ public class AnalizadorDeGramatica {
         }
         return false;
     }
-    public String[] getProducciones(){
+
+    public String[] getProducciones() {
         return producciones;
     }
-    
-    public String[] getDerivaciones(){
+
+    public String[] getDerivaciones() {
         return derivaciones;
     }
-    
-    public String[] getTerminales(){
+
+    public String[] getTerminales() {
         return terminales;
     }
-    
-    public String[] getNoTerminales(){
+
+    public String[] getNoTerminales() {
         return noTerminales;
     }
 

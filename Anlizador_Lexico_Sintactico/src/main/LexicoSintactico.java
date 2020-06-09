@@ -1,5 +1,6 @@
-package analizador_sintactico;
+package main;
 
+import analizador_sintactico.Analizador_Sintactico;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
