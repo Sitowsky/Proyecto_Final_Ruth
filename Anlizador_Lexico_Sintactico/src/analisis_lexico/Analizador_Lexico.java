@@ -16,7 +16,12 @@ public class Analizador_Lexico {
     String lexema;
     int token;
     int i = 0;
-
+    ArrayList<String> tokens = new ArrayList<>();
+    int identificador = 500;
+    int reservada = 300;
+    int caracter = 50;
+    
+    
     public String tokenizer(String input, int i) {
         int estado = 0;
         lexema = "";
@@ -111,6 +116,7 @@ public class Analizador_Lexico {
                     } else {
                         if (esEspacio(input.charAt(i)) == true || esCaracter(input.charAt(i)) == true) {
                             setI(i);
+                            agregaTokens(lexema+ "  |   Identificador   |    Int | " +identificador++ );
                             return ("id");
                         } else {
 
@@ -124,10 +130,13 @@ public class Analizador_Lexico {
 
                     if ((input.charAt(i - 1)) == ':' && (input.charAt(i)) == '=') {
                         setI(i + 1);
+                        agregaTokens(":="+ "  |   Símbolo especial   |    Asignación  | " +caracter++ );                        
                         return (":=");
                     } else {
                         i++;
                         setI(i);
+                        String tipo = queEs(lexema);
+                        agregaTokens(lexema+ "  |   Símbolo especial wewewe  |    "+tipo+"  | " +caracter++ );
                         return (lexema);
                     }
                 case 7:
@@ -154,17 +163,20 @@ public class Analizador_Lexico {
                                 && (input.charAt(i + 3)) == 'r' && (input.charAt(i + 4)) == 'a' && (input.charAt(i + 5)) == 'm'
                                 && ((input.charAt(i + 6)) == '\n' || (input.charAt(i + 6)) == ' ' || (input.charAt(i + 6)) == '\t')) {
                             i = i + 7;
-                            setI(i);
+                            setI(i);                          
+                            agregaTokens("program"+ "  |    Palabra reservada  |    Int  | " +reservada++ );
                             return ("program");
 
                         } else if ((input.charAt(i)) == 'e' && (input.charAt(i + 1)) == 'g' && (input.charAt(i + 2)) == 'i'
                                 && (input.charAt(i + 3)) == 'n' && ((input.charAt(i + 4)) == '\n' || (input.charAt(i + 4)) == ' ' || (input.charAt(i + 4)) == '\t')) {
                             i = i + 5;
                             setI(i);
+                            agregaTokens("begin"+ "  |    Palabra reservada  |    Int  | " +reservada++ );
                             return ("begin");
                         } else if ((input.charAt(i)) == 'n' && (input.charAt(i + 1)) == 'd') {
                             i = i + 3;
                             setI(i);
+                            agregaTokens("end"+ "  |    Palabra reservada  |    Int  | " +reservada++ );
                             return ("end");
                         }
                     } else {
@@ -179,6 +191,7 @@ public class Analizador_Lexico {
                     }
                 case 9:
                     setI(i);
+                    agregaTokens(lexema+ "  |    Número entero  |    Int  |  10 " );
                     return ("intliteral");
                 case 10:
                     if (esDigito(input.charAt(i)) || esCero(input.charAt(i))) {
@@ -193,6 +206,7 @@ public class Analizador_Lexico {
                     break;
                 case 11:
                     setI(i);
+                    agregaTokens(lexema+ "  |    Número flotante  |    Flotante  |  11 " );
                     return ("realliteral");
                 default:
 
@@ -256,5 +270,30 @@ public class Analizador_Lexico {
     public int getI() {
         return this.i;
     }
+    
+    public void agregaTokens(String lexema){
+        tokens.add(lexema);
+        
+    }
+    
+    public String queEs(String lexema){
+        String tipo = "";
+        switch(lexema){
+            case "-": tipo ="Resta" ;break;
+            case "+": tipo ="Suma";break;
+            case ";": tipo ="Punto y coma";break;
+            
+        }
+                
+        return tipo;
+        
+    }
+    
+    public void impresionTokens(){
+        for (int x = 0; x < tokens.size(); x++) {
+            System.out.println(tokens.get(x));
+        }
+        
+}
 
 }
