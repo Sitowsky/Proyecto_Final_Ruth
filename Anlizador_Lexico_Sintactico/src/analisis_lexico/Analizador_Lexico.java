@@ -136,7 +136,7 @@ public class Analizador_Lexico {
                         i++;
                         setI(i);
                         String tipo = queEs(lexema);
-                        agregaTokens(lexema+ "  |   Símbolo especial wewewe  |    "+tipo+"  | " +caracter++ );
+                        agregaTokens(lexema+ "  |   Símbolo especial  |    "+tipo+"  | " +caracter++ );
                         return (lexema);
                     }
                 case 7:
