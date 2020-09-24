@@ -6,6 +6,7 @@ package analisis_lexico;
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -20,8 +21,7 @@ public class Analizador_Lexico {
     int identificador = 500;
     int reservada = 300;
     int caracter = 50;
-    
-    
+
     public String tokenizer(String input, int i) {
         int estado = 0;
         lexema = "";
@@ -118,7 +118,7 @@ public class Analizador_Lexico {
                             setI(i);
                             //a ver pa que aparescan ordenados en la tabla 
 //     FAB                       agregaTokens(lexema+ "|   Identificador   |    Int | " +identificador++ );
-                            agregaTokens(ProporcionalColum(lexema)+ "| Identificador     | Int             | " +identificador++ );
+                            agregaTokens(ProporcionalColum(lexema) + "| Identificador     | Int             | " + identificador++);
                             return ("id");
                         } else {
 
@@ -132,14 +132,14 @@ public class Analizador_Lexico {
 
                     if ((input.charAt(i - 1)) == ':' && (input.charAt(i)) == '=') {
                         setI(i + 1);
-                        agregaTokens(":=      "+ "| Símbolo especial  | Asignación      | " +caracter++ );                        
+                        agregaTokens(":=      " + "| Símbolo especial  | Asignación      | " + caracter++);
                         return (":=");
                     } else {
                         i++;
                         setI(i);
                         String tipo = queEs(lexema);
 //  FAB                      agregaTokens(lexema+ "  |   Símbolo especial  |    "+tipo+"  | " +caracter++ );
-                        agregaTokens(ProporcionalColum(lexema)+ "| Símbolo especial  | "+tipo+"    | "+caracter++ );
+                        agregaTokens(ProporcionalColum(lexema) + "| Símbolo especial  | " + tipo + "    | " + caracter++);
                         return (lexema);
                     }
                 case 7:
@@ -166,20 +166,20 @@ public class Analizador_Lexico {
                                 && (input.charAt(i + 3)) == 'r' && (input.charAt(i + 4)) == 'a' && (input.charAt(i + 5)) == 'm'
                                 && ((input.charAt(i + 6)) == '\n' || (input.charAt(i + 6)) == ' ' || (input.charAt(i + 6)) == '\t')) {
                             i = i + 7;
-                            setI(i);                          
-                            agregaTokens("program"+ " | Palabra reservada | Program start   | " +reservada++ );
+                            setI(i);
+                            agregaTokens("program" + " | Palabra reservada | Program start   | " + reservada++);
                             return ("program");
 
                         } else if ((input.charAt(i)) == 'e' && (input.charAt(i + 1)) == 'g' && (input.charAt(i + 2)) == 'i'
                                 && (input.charAt(i + 3)) == 'n' && ((input.charAt(i + 4)) == '\n' || (input.charAt(i + 4)) == ' ' || (input.charAt(i + 4)) == '\t')) {
                             i = i + 5;
                             setI(i);
-                            agregaTokens("begin"+ "   | Palabra reservada | Inicio programa | " +reservada++ );
+                            agregaTokens("begin" + "   | Palabra reservada | Inicio programa | " + reservada++);
                             return ("begin");
                         } else if ((input.charAt(i)) == 'n' && (input.charAt(i + 1)) == 'd') {
                             i = i + 3;
                             setI(i);
-                            agregaTokens("end"+ "     | Palabra reservada | Fin de programa | " +reservada++ );
+                            agregaTokens("end" + "     | Palabra reservada | Fin de programa | " + reservada++);
                             return ("end");
                         }
                     } else {
@@ -195,7 +195,7 @@ public class Analizador_Lexico {
                 case 9:
                     setI(i);
 // FAB                   agregaTokens(lexema+ "|    Número entero  |    Int  |  10 " );
-                    agregaTokens(ProporcionalColum(lexema)+ "| Número entero     | Int             | 10 " );
+                    agregaTokens(ProporcionalColum(lexema) + "| Número entero     | Int             | 10 ");
                     return ("intliteral");
                 case 10:
                     if (esDigito(input.charAt(i)) || esCero(input.charAt(i))) {
@@ -211,7 +211,7 @@ public class Analizador_Lexico {
                 case 11:
                     setI(i);
 //   FAB                 agregaTokens(lexema+ "|    Número flotante  |    Flotante  |  11 " );
-                    agregaTokens(ProporcionalColum(lexema)+ "| Número flotante   | Flotante        | 11 " );
+                    agregaTokens(ProporcionalColum(lexema) + "| Número flotante   | Flotante        | 11 ");
                     return ("realliteral");
                 default:
 
@@ -275,51 +275,97 @@ public class Analizador_Lexico {
     public int getI() {
         return this.i;
     }
-    
-    public void agregaTokens(String lexema){
-        tokens.add(lexema);
-        
-    }
-    
-    public String queEs(String lexema){
-        String tipo = "";
-        switch(lexema){
-            case "-": tipo ="Resta       " ;break;
-            case "+": tipo ="Suma        ";break;
-            case ";": tipo ="Punto y coma";break;
-            
+
+    public void agregaTokens(String lexema) {
+
+        if (contiene(lexema).equals("")) {
+            int m = veces(lexema);
+            tokens.add(lexema + "     |     " + m);
+        } else {
+            String yaEsta = contiene(lexema);
+            int m = veces(yaEsta);
+            String[] parts = yaEsta.split("\\|");
+            tokens.add(reemplazar(yaEsta,parts[4],Integer.toString(m)));
         }
-                
-        return tipo;
-        
+
     }
-    
-    public void impresionTokens(){ //9,18,13
+
+    public String queEs(String lexema) {
+        String tipo = "";
+        switch (lexema) {
+            case "-":
+                tipo = "Resta       ";
+                break;
+            case "+":
+                tipo = "Suma        ";
+                break;
+            case "*":
+                tipo = "Multiplicación ";
+                break;
+            case ";":
+                tipo = "Punto y coma";
+                break;
+            case "(":
+                tipo = "Paréntesis que abre";
+                break;
+            case ")":
+                tipo = "Paréntesis que cierra";
+                break;
+        }
+
+        return tipo;
+
+    }
+
+    public void impresionTokens() { //9,18,13
         System.out.println("LEXEMA  |      TOKEN        |       TIPO      | VALOR | REPETICIONES ");
         for (int x = 0; x < tokens.size(); x++) {
             System.out.println(tokens.get(x));
         }
-        
-}
+
+    }
 
     private String ProporcionalColum(String lexema) {//metodo para agregar espacios y al imprimir salga por culomnas
-        if(lexema.length() < 8){
+        if (lexema.length() < 8) {
             for (int j = lexema.length(); j < 8; j++) {
-                lexema =lexema + " ";
+                lexema = lexema + " ";
             }
             return lexema;
         }
-       return lexema;     
+        return lexema;
+    }
+
+    public String contiene(String lexema) {
+        String palabra = "";
+        String[] parts = lexema.split("\\|");
+        String pala = parts[0];
+        for (int j = 0; j < tokens.size(); j++) {
+            if ((tokens.get(j)).contains(pala)) {
+                return tokens.get(j);
+            }
+        }
+        return palabra;
+    }
+
+    private int veces(String yaEsta) {
+        int veces = 0;
+        String[] parts = yaEsta.split("\\|");
+        String pala = parts[0];
+        for (int j = 0; j < tokens.size(); j++) {
+
+            
+            if ((tokens.get(j)).contains(pala)) {
+                veces = veces + 1;
+                System.out.println(veces);
+
+            }
+        }
+
+        return veces+1;
     }
     
-    private String ProporcionalColum2(String tipo) {//metodo para agregar espacios y al imprimir salga por culomnas
-        if(tipo.length() < 11){
-            for (int j = tipo.length(); j < 8; j++) {
-                tipo =tipo + " ";
-            }
-            return tipo;
-        }
-       return tipo;     
-    }
+    public static String reemplazar(String cadena, String busqueda, String reemplazo) {
+  return cadena.replaceAll(busqueda, reemplazo);
+}
 
 }

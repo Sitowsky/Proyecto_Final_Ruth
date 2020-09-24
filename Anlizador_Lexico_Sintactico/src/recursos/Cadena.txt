@@ -1,1 +1,1 @@
-program begin Precio := 3212 + 53.25 ; Precio2 := 32 - 3.25 ; Precio2 := Precio - 23.25 ; end
+program begin Precio := (3212 + 53.25) ; Precio2 := 32 * 3.25 ; Precio2 := Precio - 23.25 ; end
