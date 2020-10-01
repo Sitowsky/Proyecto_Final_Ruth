@@ -33,6 +33,7 @@ public class Analizador_Sintactico {
         ag.analizar();
         LLDriver();
         n.impresionTokens();
+        n.tablaSimbolos();
     }
 
     private void LLDriver() {

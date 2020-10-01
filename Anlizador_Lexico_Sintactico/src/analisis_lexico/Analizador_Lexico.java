@@ -5,8 +5,16 @@ package analisis_lexico;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -18,6 +26,7 @@ public class Analizador_Lexico {
     int token;
     int i = 0;
     ArrayList<String> tokens = new ArrayList<>();
+    ArrayList<String> simbols = new ArrayList<>();
     int identificador = 500;
     int reservada = 300;
     int caracter = 50;
@@ -118,7 +127,7 @@ public class Analizador_Lexico {
                             setI(i);
                             //a ver pa que aparescan ordenados en la tabla 
 //     FAB                       agregaTokens(lexema+ "|   Identificador   |    Int | " +identificador++ );
-                            agregaTokens(ProporcionalColum(lexema,0) + "| Identificador     | Int                   | " + identificador++);
+                            agregaTokens(ProporcionalColum(lexema, 0) + "| Identificador     | Int                   | " + identificador++);
                             return ("id");
                         } else {
 
@@ -132,14 +141,14 @@ public class Analizador_Lexico {
 
                     if ((input.charAt(i - 1)) == ':' && (input.charAt(i)) == '=') {
                         setI(i + 1);
-                        agregaTokens(":=      " + "| Símbolo especial  | Asignación            | " + caracter++ +" ");
+                        agregaTokens(":=      " + "| Símbolo especial  | Asignación            | " + caracter++ + " ");
                         return (":=");
                     } else {
                         i++;
                         setI(i);
                         String tipo = queEs(lexema);
 //  FAB                      agregaTokens(lexema+ "  |   Símbolo especial  |    "+tipo+"  | " +caracter++ );
-                        agregaTokens(ProporcionalColum(lexema,0) + "| Símbolo especial  | " + tipo + " | " + caracter++ +" ");
+                        agregaTokens(ProporcionalColum(lexema, 0) + "| Símbolo especial  | " + tipo + " | " + caracter++ + " ");
                         return (lexema);
                     }
                 case 7:
@@ -195,7 +204,7 @@ public class Analizador_Lexico {
                 case 9:
                     setI(i);
 // FAB                   agregaTokens(lexema+ "|    Número entero  |    Int  |  10 " );
-                    agregaTokens(ProporcionalColum(lexema,0) + "| Número entero     | Int                   | 10 ");
+                    agregaTokens(ProporcionalColum(lexema, 0) + "| Número entero     | Int                   | 10 ");
                     return ("intliteral");
                 case 10:
                     if (esDigito(input.charAt(i)) || esCero(input.charAt(i))) {
@@ -211,7 +220,7 @@ public class Analizador_Lexico {
                 case 11:
                     setI(i);
 //   FAB                 agregaTokens(lexema+ "|    Número flotante  |    Flotante  |  11 " );
-                    agregaTokens(ProporcionalColum(lexema,0) + "| Número flotante   | Flotante              | 11 ");
+                    agregaTokens(ProporcionalColum(lexema, 0) + "| Número flotante   | Flotante              | 11 ");
                     return ("realliteral");
                 default:
 
@@ -277,7 +286,7 @@ public class Analizador_Lexico {
     }
 
     public void agregaTokens(String lexema) {
-        
+
         if (contiene(lexema).equals("")) {
             int m = veces(lexema);
             tokens.add(lexema + "   |    " + m);
@@ -285,8 +294,8 @@ public class Analizador_Lexico {
             String yaEsta = contiene(lexema);
             int m = veces(yaEsta);
             String[] parts = yaEsta.split("\\|");
-            String auxm="    "+Integer.toString(m);
-            tokens.add(reemplazar(yaEsta, parts[4],auxm ));
+            String auxm = "    " + Integer.toString(m);
+            tokens.add(reemplazar(yaEsta, parts[4], auxm));
         }
 
     }
@@ -368,7 +377,6 @@ public class Analizador_Lexico {
         String[] parts = yaEsta.split("\\|");
         String pala = parts[0];
         for (int j = 0; j < tokens.size(); j++) {
-
             if ((tokens.get(j)).contains(pala)) {
                 veces = veces + 1;
                 System.out.println(veces);
@@ -381,6 +389,84 @@ public class Analizador_Lexico {
 
     public static String reemplazar(String cadena, String busqueda, String reemplazo) {
         return cadena.replaceAll(busqueda, reemplazo);
+    }
+
+    @SuppressWarnings("empty-statement")
+    public void tablaSimbolos() {
+
+        for (int j = 0; j < tokens.size(); j++) {
+            String[] parts = (tokens.get(j)).split("\\|");
+            String comprobar = parts[1];
+            if (comprobar.contains("Identificador") || comprobar.contains("Número flotante") || comprobar.contains("Número entero")) {
+                simbols.add(tokens.get(j));
+            }
+
+        }
+
+        for (int x = 0; x < simbols.size(); x++) {
+            String[] parts = (simbols.get(x)).split("\\|");
+            String comprobar = parts[0];
+            for (int j = x - 1; j > -1; j--) {
+                String[] parts2 = (simbols.get(j)).split("\\|");
+                String comprobar2 = parts2[0];
+                if (comprobar2.contains(comprobar)) {
+                    simbols.remove(j);
+                    x = x - 1;
+                }
+            }
+
+        }
+
+        for (int x = 0; x < simbols.size(); x++) {
+            String[] parts = (simbols.get(x)).split("\\|");
+            String valide;
+            String nombre = parts[0].replaceAll(" ", "");
+            String tipo = parts[1].replaceAll(" ", "");
+            String valatr;
+
+            String repe = parts[4].replaceAll(" ", "");
+            if (tipo.contains("Identificador")) {
+                valide = parts[3].replaceAll(" ", "");
+                valatr = "0";
+            } else {
+                valide = parts[0].replaceAll(" ", "");
+                valatr = parts[0].replaceAll(" ", "");
+            }
+            String lineas = busqueda(nombre);
+            simbols.set(x, nombre + " | " + tipo + "  |          " + valide + "         |          " + repe + "    |      "+lineas+"           |  " + valatr);
+        }
+
+        System.out.println("NOMBRE  |      TIPO        |         VALOR IDENTIFICACIÓN          |  REPETICIONES |  LÍNEA  |  VALOR ATRIBUTO  ");
+        for (int x = 0; x < simbols.size(); x++) {
+            System.out.println(simbols.get(x));
+        }
+
+//       
+    }
+
+    private String busqueda(String nombre) {
+        String lineas="";
+        try {
+            FileReader fr = new FileReader("src/recursos/Cadena.txt");
+            BufferedReader bf = new BufferedReader(fr);
+            long lNumeroLineas = 0;
+            String sCadena;
+            
+
+            while ((sCadena = bf.readLine()) != null) {
+                String[] parts = (sCadena.split(" "));
+                for (String part : parts) {
+                    if (part.equals(nombre)) {
+                        lineas=lineas+(lNumeroLineas+1)+",";
+                    }
+                }
+                lNumeroLineas++;
+            }
+        } catch (FileNotFoundException fnfe) {
+        } catch (IOException ioe) {
+        }
+        return lineas;
+
     }
 
 }
