@@ -436,10 +436,13 @@ public class Analizador_Lexico {
             simbols.set(x, nombre + " | " + tipo + "  |          " + valide + "         |          " + repe + "    |      "+lineas+"           |  " + valatr);
         }
 
-        System.out.println("NOMBRE  |      TIPO        |         VALOR IDENTIFICACIÓN          |  REPETICIONES |  LÍNEA  |  VALOR ATRIBUTO  ");
-        for (int x = 0; x < simbols.size(); x++) {
-            System.out.println(simbols.get(x));
-        }
+        System.out.println("\nNOMBRE  |      TIPO     | VALOR IDENTIFICACIÓN |REPETICIONES|LÍNEA|VALOR ATRIBUTO");
+       
+//        for (int x = 0; x < simbols.size(); x++) { //el metodo de fabricio para imprimir
+//            System.out.println(simbols.get(x));
+//        }
+        Table2x2 t = new Table2x2(simbols); //metodo mio pa imprimir 
+  
 
 //       
     }
