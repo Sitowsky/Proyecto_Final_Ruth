@@ -379,8 +379,7 @@ public class Analizador_Lexico {
         for (int j = 0; j < tokens.size(); j++) {
             if ((tokens.get(j)).contains(pala)) {
                 veces = veces + 1;
-                System.out.println(veces);
-
+               
             }
         }
 
@@ -436,7 +435,7 @@ public class Analizador_Lexico {
             simbols.set(x, nombre + " | " + tipo + "  |          " + valide + "         |          " + repe + "    |      "+lineas+"           |  " + valatr);
         }
 
-        System.out.println("\nNOMBRE  |      TIPO     | VALOR IDENTIFICACIÓN |REPETICIONES|LÍNEA|VALOR ATRIBUTO");
+
        
 //        for (int x = 0; x < simbols.size(); x++) { //el metodo de fabricio para imprimir
 //            System.out.println(simbols.get(x));
