@@ -13,7 +13,7 @@ public class Table {
     int colum_tam;
     ArrayList<String> simbols_table = new ArrayList<>();
 
-    Table(ArrayList<String> simbols, int columnas) {
+    public Table(ArrayList<String> simbols, int columnas) {
 
         simbols_table = new ArrayList<>();
         int x = columnas, y = simbols.size(); //x es el numero de columnas
@@ -111,6 +111,10 @@ public class Table {
 
     String[][] arrayGet() {
         return matriz;
+    }
+    
+    ArrayList<String> arrayListGet(){
+    return simbols_table;
     }
 
 }
