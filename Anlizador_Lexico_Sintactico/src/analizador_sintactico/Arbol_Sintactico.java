@@ -14,6 +14,11 @@ package analizador_sintactico;
  */
 public class Arbol_Sintactico {
 
+    public Arbol_Sintactico(String[][]tokens ,String[][]simbols) {
+        SubExpresion(tokens);
+//        System.out.println("alo mada faker"+arrayGet[0][0]);
+    }
+
     //el paso 1 lo realiza el analizador lexico
     //para el paso 2 necesitamos saber cuantas subexpresiones son  R. SEPARADO POR PARENTESIS , SIGNOS 
     //Es necesario la jerarquia de las operaciones 
@@ -25,12 +30,44 @@ public class Arbol_Sintactico {
     //metodos necesarios 
     //1.analizar la jerarquia , y separar en expresiones 
     //
-    private void SubExpresion(String token) {
-        switch (token) {
-        
-        
-        
+    public void SubExpresion(String[][]tokens) {
+        String expresion="";
+        int desde=0 ;
+        for (int fila = 0; fila < tokens.length; fila++) {
+           
+            if (tokens[fila][1].equals("Identificador")) {
+                expresion = tokens[fila][0]; //columna 0
+                desde=fila;
+                fila++;
+                
+                if (tokens[fila][0].equals(":=")) {
+                    expresion = expresion + tokens[fila][0];
+                    fila++;
+                    
+                    while (!tokens[fila][0].equals(";") ) {
+                        expresion = expresion + tokens[fila][0];
+                        fila++;
+                    }
+                    System.out.println("su expresion aritmetica es: "+ expresion);
+                    Validacion(expresion,desde, fila);
+
+                }
+            }
         }
 
+    }
+
+    private void Validacion(String expresion, int desde , int hasta) {
+        
+        numSubExpr(expresion);
+    
+    }
+
+    private void numSubExpr(String expresion) {
+        String[] e =expresion.split("\\=");
+        System.out.println("la expresion del split -----"+e[1]);
+        
+        
+        
     }
 }

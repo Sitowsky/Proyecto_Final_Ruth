@@ -21,12 +21,10 @@ public class Table {
         matriz = new String[y][x]; //primero en filas (y) ,luego en columnas(x)
 //        System.out.println("\nTamaño de la matriz , Columnas: " + matriz[0].length + ", Filas: " + matriz.length);
 
-        separar(simbols,x); //agregara lo de simbols a la matriz
+        separar(simbols, x); //agregara lo de simbols a la matriz
         guardarxColum(); //guarda cada elemento de forma ordenada en la tabla
         ImprimeTabla(); //imprime el nuevo arrylist de string justificado
     }
-
-
 
     private void separar(ArrayList<String> simbols, int x) {
 //        System.out.println("guardando en la matriz..........\n");
@@ -43,7 +41,6 @@ public class Table {
             colum = 0;
         }
     }
-
 
     private void guardarxColum() { //guardar a simbols_table por columna
         int fila = 0, colum = 0;
@@ -73,7 +70,7 @@ public class Table {
 
     private int determinar_tam_colum(int colum) { //nos determina el numero(int) mayor de la columna
         int fila = 0, tamaño = 0;
-        
+
         for (int j = 0; j < matriz.length; j++) { //checaremos terminos por columna para daterminar el tamaño maypr del elemento
 //            System.out.println("a ver" +fila +","+colum);
             int tam = matriz[fila][colum].length();
@@ -104,10 +101,16 @@ public class Table {
     }
 
     private void ImprimeTabla() { //imprime el nuevo arreglo justificado , simbols_table
-        for (int x = 0; x < simbols_table.size(); x++) {
+        if (matriz[0].length == 6) { //nomas pa no imprimir la primera matriz, solo la segunda :v 
+            for (int x = 0; x < simbols_table.size(); x++) {
 
-            System.out.println(simbols_table.get(x));
+                System.out.println(simbols_table.get(x));
+            }
         }
+    }
+
+    String[][] arrayGet() {
+        return matriz;
     }
 
 }

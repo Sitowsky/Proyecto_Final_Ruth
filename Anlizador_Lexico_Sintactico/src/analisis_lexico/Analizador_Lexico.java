@@ -5,6 +5,7 @@ package analisis_lexico;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import analizador_sintactico.Arbol_Sintactico;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -330,12 +331,12 @@ public class Analizador_Lexico {
     }
 
     public void impresionTokens() { //9,18,13
-//        System.out.println("LEXEMA  |      TOKEN        |         TIPO          | VALOR | REPETICIONES ");
-//        for (int x = 0; x < tokens.size(); x++) {
-//            System.out.println(tokens.get(x));
-//        }
-        System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
-        Table t0 = new Table(tokens,5);
+        System.out.println("LEXEMA  |      TOKEN        |         TIPO          | VALOR | REPETICIONES ");
+        for (int x = 0; x < tokens.size(); x++) {
+            System.out.println(tokens.get(x));
+        }
+
+        
 
     }
 
@@ -445,7 +446,12 @@ public class Analizador_Lexico {
 //            System.out.println(simbols.get(x));
 //        }
         System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
-        Table t = new Table(simbols,6); //metodo mio pa imprimir 
+        Table t2 = new Table(simbols,6); //metodo mio pa imprimir
+        
+//        System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
+        Table t1 = new Table(tokens,5); //el arraylis de token, y el numero de columnas
+        Arbol_Sintactico as = new Arbol_Sintactico(t1.arrayGet(),t2.arrayGet());
+        
   
 
 //       
