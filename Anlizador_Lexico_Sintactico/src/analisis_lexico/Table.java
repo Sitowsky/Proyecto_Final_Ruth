@@ -6,31 +6,35 @@ import java.util.ArrayList;
  *
  * @author chuy_
  */
-public class Table2x2 {
+public class Table {
 
     //decalara variables
     String matriz[][];
     int colum_tam;
     ArrayList<String> simbols_table = new ArrayList<>();
 
-    Table2x2(ArrayList<String> simbols) {
+    Table(ArrayList<String> simbols, int columnas) {
 
         simbols_table = new ArrayList<>();
-        int x = 6, y = simbols.size();
+        int x = columnas, y = simbols.size(); //x es el numero de columnas
+
         matriz = new String[y][x]; //primero en filas (y) ,luego en columnas(x)
 //        System.out.println("\nTamaño de la matriz , Columnas: " + matriz[0].length + ", Filas: " + matriz.length);
 
-        separar(simbols); //agregara lo de simbols a la matriz
+        separar(simbols,x); //agregara lo de simbols a la matriz
         guardarxColum(); //guarda cada elemento de forma ordenada en la tabla
         ImprimeTabla(); //imprime el nuevo arrylist de string justificado
     }
 
-    private void separar(ArrayList<String> simbols) {
-//        System.out.println("guardando en la matriz..........\n");
-        int colum = 0, fila = 0;
-        for (int j = 0; j <= 6; j++) {
 
-            for (int i = 0; i < 6; i++) {
+
+    private void separar(ArrayList<String> simbols, int x) {
+//        System.out.println("guardando en la matriz..........\n");
+        int colum = 0, fila = 0, filas = matriz.length;
+
+        for (int j = 0; j < filas; j++) {
+
+            for (int i = 0; i < x; i++) {/// el numero sera , el numero de columnas que tendra
                 String[] parts = (simbols.get(fila)).split("\\|");
                 matriz[fila][colum] = parts[colum].replace(" ", ""); //elimina espacios 
                 colum++;
@@ -40,21 +44,7 @@ public class Table2x2 {
         }
     }
 
-//    private void guardarxFila() { //guarda por fila 
-//        int fila = 0, colum = 0;
-//
-//        for (int i = 0; i < matriz.length; i++) { //filas 
-//            for (int j = 0; j < matriz[0].length; j++) { //columnas
-//
-//                System.out.print(matriz[fila][colum] + " | "); //+ "coordenadas:" +fila+","+colum
-//                colum++;
-//            }
-//            System.out.println("");
-//            fila++;
-//            colum = 0;
-//        }
-//
-//    }
+
     private void guardarxColum() { //guardar a simbols_table por columna
         int fila = 0, colum = 0;
 
@@ -62,7 +52,7 @@ public class Table2x2 {
             for (int j = 0; j < matriz.length; j++) { //fila
 
                 if (colum == 0) { //si es colum =0 ya que sera el metodo add
-                    determinar_tam_colum(colum);
+//                    determinar_tam_colum(colum);
                     String parte = matriz[fila][colum];
                     simbols_table.add(fila, agregar_aSimbols(parte, determinar_tam_colum(colum)) + " | ");
 //                    System.out.println(simbols_table.get(fila));
@@ -83,11 +73,14 @@ public class Table2x2 {
 
     private int determinar_tam_colum(int colum) { //nos determina el numero(int) mayor de la columna
         int fila = 0, tamaño = 0;
+        
         for (int j = 0; j < matriz.length; j++) { //checaremos terminos por columna para daterminar el tamaño maypr del elemento
+//            System.out.println("a ver" +fila +","+colum);
             int tam = matriz[fila][colum].length();
             if (tam > tamaño) {
                 tamaño = tam;
             }
+//            System.out.println("el tamaño va "+ matriz[fila][colum]);
             fila++;
         }
         return tamaño;
@@ -111,7 +104,6 @@ public class Table2x2 {
     }
 
     private void ImprimeTabla() { //imprime el nuevo arreglo justificado , simbols_table
-        System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
         for (int x = 0; x < simbols_table.size(); x++) {
 
             System.out.println(simbols_table.get(x));

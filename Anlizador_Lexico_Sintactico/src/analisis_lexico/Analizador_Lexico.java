@@ -143,6 +143,8 @@ public class Analizador_Lexico {
                         setI(i + 1);
                         agregaTokens(":=      " + "| Símbolo especial  | Asignación            | " + caracter++ + " ");
                         return (":=");
+                        //ASIGNACION PARA PRACTICA 3
+                        
                     } else {
                         i++;
                         setI(i);
@@ -328,10 +330,12 @@ public class Analizador_Lexico {
     }
 
     public void impresionTokens() { //9,18,13
-        System.out.println("LEXEMA  |      TOKEN        |         TIPO          | VALOR | REPETICIONES ");
-        for (int x = 0; x < tokens.size(); x++) {
-            System.out.println(tokens.get(x));
-        }
+//        System.out.println("LEXEMA  |      TOKEN        |         TIPO          | VALOR | REPETICIONES ");
+//        for (int x = 0; x < tokens.size(); x++) {
+//            System.out.println(tokens.get(x));
+//        }
+        System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
+        Table t0 = new Table(tokens,5);
 
     }
 
@@ -440,7 +444,8 @@ public class Analizador_Lexico {
 //        for (int x = 0; x < simbols.size(); x++) { //el metodo de fabricio para imprimir
 //            System.out.println(simbols.get(x));
 //        }
-        Table2x2 t = new Table2x2(simbols); //metodo mio pa imprimir 
+        System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
+        Table t = new Table(simbols,6); //metodo mio pa imprimir 
   
 
 //       
