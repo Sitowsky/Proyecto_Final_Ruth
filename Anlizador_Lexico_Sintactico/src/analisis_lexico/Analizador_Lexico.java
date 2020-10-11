@@ -397,7 +397,7 @@ public class Analizador_Lexico {
     }
 
     @SuppressWarnings("empty-statement")
-    public void tablaSimbolos() {
+    public void tablaSimbolos() throws IOException {
 
         for (int j = 0; j < tokens.size(); j++) {
             String[] parts = (tokens.get(j)).split("\\|");

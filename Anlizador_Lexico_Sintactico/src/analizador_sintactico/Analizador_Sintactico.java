@@ -2,6 +2,7 @@ package analizador_sintactico;
 
 import analisis_lexico.Analizador_Lexico;
 import generar_estructuras.AnalizadorDeGramatica;
+import java.io.IOException;
 import pila.Pila;
 
 public class Analizador_Sintactico {
@@ -29,7 +30,7 @@ public class Analizador_Sintactico {
         n = new Analizador_Lexico();
     }
 
-    public void comenzar() {
+    public void comenzar() throws IOException {
         ag.analizar();
         LLDriver();
         n.impresionTokens();

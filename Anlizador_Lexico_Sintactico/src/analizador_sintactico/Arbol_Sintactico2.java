@@ -1,6 +1,13 @@
 package analizador_sintactico;
 
 import analisis_lexico.Table;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,7 +21,7 @@ public class Arbol_Sintactico2 {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RESET = "\u001B[0m";
 
-    public Arbol_Sintactico2(String[][] tokens, String[][] simbols, ArrayList<String> simbols_table) {
+    public Arbol_Sintactico2(String[][] tokens, String[][] simbols, ArrayList<String> simbols_table) throws IOException {
 
         System.out.println("\n*******************************************************");
         System.out.println("\nArbol sintactico abstracto\n");
@@ -22,7 +29,7 @@ public class Arbol_Sintactico2 {
 
     }
 
-    public void Expresion(String[][] tokens, ArrayList<String> simbols_table, ArrayList tipos) {// construiremos toda nuestra linea de expresion 
+    public void Expresion(String[][] tokens, ArrayList<String> simbols_table, ArrayList tipos) throws IOException {// construiremos toda nuestra linea de expresion 
         System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
 
         String expresion = "";
@@ -47,11 +54,29 @@ public class Arbol_Sintactico2 {
                 }
             }
         }
-
+        String ruta = "src/recursos/Salida.txt";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        if (archivo.exists()) {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write("NOMBRE        TIPO        VALOR  REP  LÍNEA   ATRIBUTO\n");
+            for (int i = 0; i < tipos.size(); i++) {
+                bw.write(tipos.get(i).toString()+"\n");
+            }
+        } else {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write("NOMBRE        TIPO        VALOR  REP  LÍNEA   ATRIBUTO\n");
+            for (int i = 0; i < tipos.size(); i++) {
+                bw.write(tipos.get(i).toString()+"\n");
+            }
+        }
+        bw.close();
     }
+
+
 //
 
-    public void Validacion(String[][] tokens, ArrayList<String> simbols_table, String expresion, int desde, int hasta, ArrayList tipos) {
+public void Validacion(String[][] tokens, ArrayList<String> simbols_table, String expresion, int desde, int hasta, ArrayList tipos) {
 
         int n = 0;
         String[] variables = new String[NumSubExpre(desde, hasta, tokens)];
@@ -65,12 +90,15 @@ public class Arbol_Sintactico2 {
                     if (busqueda.equals(tokens[i][0])) {
                         if (simbols_table.get(j).split("\\|")[1].contains("Númeroentero")) {
                             System.out.println(simbols_table.get(j).replace(" Númeroentero   ", "      Int     "));
+                            tipos.add(simbols_table.get(j).replace(" Númeroentero   ", "      Int     "));
                         }
                         if (simbols_table.get(j).split("\\|")[1].contains("Númeroflotante")) {
                             System.out.println(simbols_table.get(j).replace(" Númeroflotante ", "   Flotante   "));
+                            tipos.add(simbols_table.get(j).replace(" Númeroflotante ", "   Flotante   "));
                         }
                         if (simbols_table.get(j).split("\\|")[1].contains("Identificador")) {
                             System.out.println(simbols_table.get(j).replace(" Identificador  ", "      Int     "));
+                            tipos.add(simbols_table.get(j).replace(" Identificador  ", "      Int     "));
                         }
 
                     }
@@ -99,10 +127,11 @@ public class Arbol_Sintactico2 {
             if (busqueda.equals(e[0])) {
                 if (tipeFinal.equals("Int")) {
                     System.out.println(simbols_table.get(j).replace("Identificador", "     Int   "));
+                    tipos.add(simbols_table.get(j).replace("Identificador", "     Int   "));
 
                 } else {
                     System.out.println(simbols_table.get(j).replace("Identificador", "  Flotante "));
-
+                    tipos.add(simbols_table.get(j).replace("Identificador", "  Flotante "));
                 }
 
             }
@@ -110,8 +139,10 @@ public class Arbol_Sintactico2 {
         }
         if (tipeFinal.equals("Int")) {
             System.out.println("expre   |      Int     " + "|        |   |        |        |");
+            tipos.add("expre   |      Int     " + "|        |   |        |        |");
         } else {
             System.out.println("expre   |   Flotante   " + "|        |   |        |        |");
+            tipos.add("expre   |   Flotante   " + "|        |   |        |        |");
         }
 
     }
