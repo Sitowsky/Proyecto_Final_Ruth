@@ -6,6 +6,7 @@ package analisis_lexico;
  * and open the template in the editor.
  */
 import analizador_sintactico.Arbol_Sintactico;
+import analizador_sintactico.Arbol_Sintactico2;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -449,8 +450,10 @@ public class Analizador_Lexico {
         Table t2 = new Table(simbols,6); //metodo mio pa imprimir
         
 //        System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
+
         Table t1 = new Table(tokens,5); //el arraylis de token, y el numero de columnas
-        Arbol_Sintactico as = new Arbol_Sintactico(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());
+        Arbol_Sintactico2 as = new Arbol_Sintactico2(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());
+        //Arbol_Sintactico as = new Arbol_Sintactico(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());
         
   
 
