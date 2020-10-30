@@ -20,9 +20,10 @@ public class Arbol_Sintactico2 {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RESET = "\u001B[0m";
+    private final ArrayList expresiones;
 
     public Arbol_Sintactico2(String[][] tokens, String[][] simbols, ArrayList<String> simbols_table) throws IOException {
-
+        this.expresiones = new ArrayList();
         System.out.println("\n*******************************************************");
         System.out.println("\nArbol sintactico abstracto\n");
         Expresion(tokens, simbols_table, tipos);
@@ -49,6 +50,9 @@ public class Arbol_Sintactico2 {
                         expresion = expresion + tokens[fila][0];
                         fila++;
                     }
+
+                    Conversión_Infija_PostFija n = new Conversión_Infija_PostFija();
+                    expresiones.add(n.infija_postfija(expresion));
                     Validacion(tokens, simbols_table, expresion, desde, fila, tipos);
 
                 }
@@ -71,6 +75,23 @@ public class Arbol_Sintactico2 {
             }
         }
         bw.close();
+        
+        
+        String ruta2 = "src/recursos/Expresiones.txt";
+        File archivo2 = new File(ruta2);
+        BufferedWriter bw2;
+        if (archivo2.exists()) {
+            bw2 = new BufferedWriter(new FileWriter(archivo2));            
+            for (int i = 0; i < expresiones.size(); i++) {
+                bw2.write(expresiones.get(i).toString()+"\n");
+            }
+        } else {
+            bw2 = new BufferedWriter(new FileWriter(archivo2));
+            for (int i = 0; i < expresiones.size(); i++) {
+               bw2.write(expresiones.get(i).toString()+"\n");
+            }
+        }
+        bw2.close();
     }
 
 
