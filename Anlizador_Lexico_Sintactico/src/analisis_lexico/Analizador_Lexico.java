@@ -5,7 +5,6 @@ package analisis_lexico;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import analizador_sintactico.Arbol_Sintactico;
 import analizador_sintactico.Arbol_Sintactico2;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

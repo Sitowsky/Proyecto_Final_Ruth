@@ -1,4 +1,4 @@
-package analizador_sintactico;
+
 
 import analisis_lexico.Table;
 import java.util.ArrayList;

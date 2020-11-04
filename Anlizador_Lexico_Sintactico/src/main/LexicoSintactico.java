@@ -17,6 +17,7 @@ public class LexicoSintactico {
         
         Analizador_Sintactico a = new Analizador_Sintactico(cadena);
         a.comenzar();
+        
     }
     
 }

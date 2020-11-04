@@ -1,15 +1,10 @@
 package analizador_sintactico;
 
-import analisis_lexico.Table;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Arbol_Sintactico2 {
 
@@ -27,7 +22,9 @@ public class Arbol_Sintactico2 {
         System.out.println("\n*******************************************************");
         System.out.println("\nArbol sintactico abstracto\n");
         Expresion(tokens, simbols_table, tipos);
-
+        Code_Intermedio n = new Code_Intermedio();
+        n.crear();
+        
     }
 
     public void Expresion(String[][] tokens, ArrayList<String> simbols_table, ArrayList tipos) throws IOException {// construiremos toda nuestra linea de expresion 
@@ -157,13 +154,6 @@ public void Validacion(String[][] tokens, ArrayList<String> simbols_table, Strin
 
             }
 
-        }
-        if (tipeFinal.equals("Int")) {
-            System.out.println("expre   |      Int     " + "|        |   |        |        |");
-            tipos.add("expre   |      Int     " + "|        |   |        |        |");
-        } else {
-            System.out.println("expre   |   Flotante   " + "|        |   |        |        |");
-            tipos.add("expre   |   Flotante   " + "|        |   |        |        |");
         }
 
     }

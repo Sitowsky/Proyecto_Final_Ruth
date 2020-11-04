@@ -1,68 +1,79 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package analizador_sintactico;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import pila.Pila;
 
-/**
- *
- * @author fabri
- */
 public class Code_Intermedio {
 
-    public static void main(String[] args) {
+    public void crear() throws IOException {
         Code_Intermedio n = new Code_Intermedio();
-        n.crear("");
+        String cadena;
+        FileReader f = new FileReader("src/recursos/Expresiones.txt");
+        try (BufferedReader b = new BufferedReader(f)) {
+            while ((cadena = b.readLine()) != null) {
+                n.crearC(cadena);
+            }
+        }
+
     }
 
-    public void crear(String g) {
+    public void crearC(String g) throws IOException {
+        String cadenita = "";
         Pila listaInt = new Pila();
         Pila variables = new Pila();
         int varia = 1;
-        g = "32 3.25 * = Precio2";
+        writeinFile("\n");
+        writeinFile(g + "\n");
         String[] simbols = g.split(" ");
         String equal = simbols[simbols.length - 1];
-        System.out.println(Arrays.toString(simbols));
+
         for (String simbol : simbols) {
             if (simbol.equals("+") || simbol.equals("-") || simbol.equals("*") || simbol.equals("/") || simbol.equals("=")) {
                 if ((listaInt.size()) >= 2) {
-                    System.out.print(simbol + " " + listaInt.peek());
+                    cadenita = simbol + " " + listaInt.peek();
                     listaInt.pop();
-                    System.out.print(" " + listaInt.peek());
+                    cadenita = cadenita + " " + listaInt.peek();
                     listaInt.pop();
-                    System.out.print(" v" + varia);
+                    cadenita = cadenita + " v" + varia;
                     variables.push("v" + varia);
                     varia++;
-                    System.out.println("");
+                    writeinFile(cadenita + "\n");
                 } else if ((listaInt.size()) == 1 && (variables.size()) >= 1) {
-                    System.out.print(simbol + " " + listaInt.peek());
+                    cadenita = simbol + " " + listaInt.peek();
                     listaInt.pop();
-                    System.out.print(" " + variables.peek());
-                    System.out.println(" " + variables.peek());
+                    cadenita = cadenita + " " + variables.peek();
+                    cadenita = cadenita + " " + variables.peek();
+                    writeinFile(cadenita + "\n");
                 } else if ((variables.size()) >= 2 && listaInt.empty()) {
 
-                    System.out.print(simbol + " " + variables.peek());
+                    cadenita = simbol + " " + variables.peek();
                     variables.pop();
-                    System.out.print(" " + variables.peek());
-                    System.out.print(" " + variables.peek());
-                    System.out.println("");
+                    cadenita = cadenita + " " + variables.peek();
+                    cadenita = cadenita + " " + variables.peek();
+                    writeinFile(cadenita + "\n");
                 } else {
-                    System.out.print(simbol + " " + variables.peek());
+                    cadenita = simbol + " " + variables.peek();
                     variables.pop();
-                    System.out.print(" " + equal);
-                    System.out.print(" " + equal);
-                    System.out.println("");
-
+                    cadenita = cadenita + " " + equal;
+                    cadenita = cadenita + " " + equal;
+                    writeinFile(cadenita + "\n");
                 }
-
             } else {
                 listaInt.push(simbol);
             }
+        }
+
+    }
+
+    public void writeinFile(String c) throws IOException {
+        String ruta = "src/recursos/cuad.txt";
+        File archivo = new File(ruta);
+        try (FileWriter f2 = new FileWriter(archivo, true)) {
+            f2.write(c);
         }
 
     }

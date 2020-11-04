@@ -15,6 +15,9 @@ import pila.Pila;
 public class Conversión_Infija_PostFija {
     
     @SuppressWarnings("empty-statement")
+    
+    
+    
     public String infija_postfija(String g) {
         ArrayList<precedencia> precede = new ArrayList();
         precede.add(new precedencia(4, "="));
@@ -31,7 +34,6 @@ public class Conversión_Infija_PostFija {
             }
         }
         String equal = g.substring(0, igual-2);
-        System.out.println(equal);
         g = g.substring(igual);
         Pila pilaOperadores = new Pila();
         String sufija = "";
