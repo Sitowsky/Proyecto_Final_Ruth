@@ -4,9 +4,11 @@ public class Pila {
 
     Nodo inicio;
     Nodo fin;
+    int tamaño;
 
     public Pila() {
         inicio = fin = null;
+        tamaño = 0;
     }
 
     public void push(String s) { //colocar en la pila 
@@ -15,6 +17,7 @@ public class Pila {
 
         nuevo.siguiente = inicio;
         inicio = nuevo;
+        tamaño++;
 
     }
 
@@ -40,6 +43,10 @@ public class Pila {
             return true;
         else return false;
     }
+    
+    public int size(){ //comprobar si hay algun elemento en la pila
+        return tamaño;
+    }
 
     public String peek() {//retornar el dato del ultimo elemento añadido a la pila
 
@@ -63,6 +70,7 @@ public class Pila {
         
         inicio = actual.siguiente;
         actual.siguiente = null;
+        tamaño--;
         
     }
 
