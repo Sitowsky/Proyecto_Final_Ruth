@@ -22,14 +22,11 @@ public class AnalizadorDeGramatica {
             while ((line = bf.readLine()) != null) {//Empezamos a leer hasta que se termine el archivo para saber el numero de lineas
                 length++;
             }
-
             bf = new BufferedReader(new FileReader("src/recursos/Gramatica.txt")); //Volvemos a instanciar para que regrese el puntero al inicio
-
             producciones = new String[length];
             derivaciones = new String[length];//parte derecha
             String[] aux1 = new String[length];
             String[] derivantes = new String[length]; //parte izquierda
-
             for (int i = 0; (line = bf.readLine()) != null; i++) { //For porque ya sabemos el numero delineas que tiene el archivo
                 producciones[i] = line;
                 aux1[i] = line.split("->")[0];//split para poder guaradar las producciones 
@@ -41,17 +38,14 @@ public class AnalizadorDeGramatica {
                     derivaciones[i] = "";//Si hay una derivacion en vacio(CREO)
                 }
             }
-
             Set<String> noTerminalesSet = new LinkedHashSet<>(); //Array dinamico, nos sirve como auxiliar para no redimencionar
             noTerminalesSet.addAll(Arrays.asList(derivantes));
-
             int z = 0;
             noTerminales = new String[noTerminalesSet.size()];//Creamos el array estatico sabiend el tamño del arrayList
             for (String s : noTerminalesSet) {
                 noTerminales[z] = s;//Pasamos la información contenida del arrayList al array estatico
                 z++;
             }
-
             Set<String> terminalesSet = new LinkedHashSet<>(); //Array dinamico, nos sirve como auxiliar para no redimencionar
             String[] aux;
             for (String derivacione : derivaciones) {
@@ -66,7 +60,6 @@ public class AnalizadorDeGramatica {
                     }
                 }
             }
-
             z = 0;
             terminales = new String[terminalesSet.size()];
             for (String s : terminalesSet) {
@@ -121,5 +114,4 @@ public class AnalizadorDeGramatica {
     public String[] getNoTerminales() {
         return noTerminales;
     }
-
 }

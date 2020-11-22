@@ -10,7 +10,6 @@ public class Arbol_Sintactico2 {
 
     ArrayList<String> simbols_table_new = new ArrayList<>();
     ArrayList tipos = new ArrayList();
-
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -29,29 +28,23 @@ public class Arbol_Sintactico2 {
 
     public void Expresion(String[][] tokens, ArrayList<String> simbols_table, ArrayList tipos) throws IOException {// construiremos toda nuestra linea de expresion 
         System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
-
         String expresion = "";
         int desde = 0;
         for (int fila = 0; fila < tokens.length; fila++) {
-
             if (tokens[fila][1].equals("Identificador")) { //Desde que inicie con un identifcador
                 expresion = tokens[fila][0]; //columna 0
                 desde = fila;
                 fila++;
-
                 if (tokens[fila][0].equals(":=")) { //luego debe haber un simbolo de asignacion
                     expresion = expresion + tokens[fila][0];
                     fila++;
-
                     while (!tokens[fila][0].equals(";")) { // guardaremos toda la linea hasta que termine con ";"
                         expresion = expresion + tokens[fila][0];
                         fila++;
                     }
-
                     Conversión_Infija_PostFija n = new Conversión_Infija_PostFija();
                     expresiones.add(n.infija_postfija(expresion));
                     Validacion(tokens, simbols_table, expresion, desde, fila, tipos);
-
                 }
             }
         }
@@ -95,10 +88,8 @@ public class Arbol_Sintactico2 {
 //
 
 public void Validacion(String[][] tokens, ArrayList<String> simbols_table, String expresion, int desde, int hasta, ArrayList tipos) {
-
         int n = 0;
         String[] variables = new String[NumSubExpre(desde, hasta, tokens)];
-
         for (int i = desde + 1; i < hasta; i++) {
             if (tokens[i][2].equals("Int") || tokens[i][2].equals("Flotante")) {
                 variables[n] = tokens[i][2];
@@ -118,14 +109,11 @@ public void Validacion(String[][] tokens, ArrayList<String> simbols_table, Strin
                             System.out.println(simbols_table.get(j).replace(" Identificador  ", "      Int     "));
                             tipos.add(simbols_table.get(j).replace(" Identificador  ", "      Int     "));
                         }
-
                     }
-
                 }
                 n++;
             }
         }
-
         String[] e = expresion.split("\\:");
         String tipeFinal = "";
         for (int i = 0; i < variables.length; i++) {
@@ -134,11 +122,8 @@ public void Validacion(String[][] tokens, ArrayList<String> simbols_table, Strin
 
             } else {
                 tipeFinal = comprobacionTipos(tipeFinal, variables[i]);
-
             }
-
         }
-
         for (int j = 0; j < simbols_table.size(); j++) {
             String variable = simbols_table.get(j).split("\\|")[0];
             String busqueda = variable.replaceAll(" ", "");
@@ -146,20 +131,15 @@ public void Validacion(String[][] tokens, ArrayList<String> simbols_table, Strin
                 if (tipeFinal.equals("Int")) {
                     System.out.println(simbols_table.get(j).replace("Identificador", "     Int   "));
                     tipos.add(simbols_table.get(j).replace("Identificador", "     Int   "));
-
                 } else {
                     System.out.println(simbols_table.get(j).replace("Identificador", "  Flotante "));
                     tipos.add(simbols_table.get(j).replace("Identificador", "  Flotante "));
                 }
-
             }
-
         }
-
     }
 
     private String comprobacionTipos(String tipeFinal, String tipo) { //comprobar el tipo final de la expresion
-
         if (tipeFinal.equals("Int") && tipo.equals("Int")) { //si ambos son int
             return "Int";
         } else if (tipeFinal.equals("Int") && tipo.equals("Flotante")) {
@@ -170,7 +150,6 @@ public void Validacion(String[][] tokens, ArrayList<String> simbols_table, Strin
             return "Flotante";
         }
         return null;
-
     }
 
     private int NumSubExpre(int desde, int hasta, String[][] tokens) { //saber el tamño del arreglo donde pondremos los tipos
@@ -179,9 +158,7 @@ public void Validacion(String[][] tokens, ArrayList<String> simbols_table, Strin
             if (tokens[i][2].equals("Int") || tokens[i][2].equals("Flotante")) {
                 subExpre++;
             }
-
         }
         return subExpre;
     }
-
 }

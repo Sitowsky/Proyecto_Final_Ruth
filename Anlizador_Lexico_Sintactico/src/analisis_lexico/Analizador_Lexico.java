@@ -1,10 +1,5 @@
 package analisis_lexico;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import analizador_sintactico.Arbol_Sintactico2;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,12 +12,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- * @author Fabricio
- */
 public class Analizador_Lexico {
-
     String lexema;
     int token;
     int i = 0;
@@ -31,11 +21,10 @@ public class Analizador_Lexico {
     int identificador = 500;
     int reservada = 300;
     int caracter = 50;
-
+    
     public String tokenizer(String input, int i) {
         int estado = 0;
         lexema = "";
-
         while (i < input.length()) {
             switch (estado) {
                 case 0:
@@ -45,24 +34,19 @@ public class Analizador_Lexico {
                         estado = 1;
                         break;
                     } else if ((esDigito(input.charAt(i)))) {//primer caracter  digito
-
                         estado = 2;
                         break;
                     } else if (esCaracter(input.charAt(i))) { //primer caracter
-
                         lexema = lexema + input.charAt(i);
                         estado = 6;
                         break;
                     } else if (esCero(input.charAt(i))) { //primer caracter
-
                         estado = 3;
                         break;
                     } else {
                         estado = 4;
-
                         break;
                     }
-
                 case 1:
                     while ((esGuion(input.charAt(i)))) { //si hay guiones que los guarde en el lexema                      
                         lexema = lexema + input.charAt(i);
@@ -77,7 +61,6 @@ public class Analizador_Lexico {
                         System.out.println("Error léxico en:" + lexema);
                         System.exit(0);
                     }
-
                 case 2:
                     if (esDigito(input.charAt(i)) || esFlotante(input.charAt(i), input.charAt(i + 1))) {
                         lexema = lexema + input.charAt(i);
@@ -90,7 +73,6 @@ public class Analizador_Lexico {
                     }
                     break;
                 case 3:
-
                     lexema = lexema + input.charAt(i);
                     i++;
                     if (esCero(input.charAt(i)) || esMinus(input.charAt(i)) || esMayus(input.charAt(i))) {
@@ -102,7 +84,6 @@ public class Analizador_Lexico {
                         i++;
                         break;
                     }
-
                 case 4:
                     if (esMinus(input.charAt(i))) {
                         estado = 8;
@@ -112,7 +93,6 @@ public class Analizador_Lexico {
                         i++;
                         break;
                     }
-
                 case 5:
                     while (esMinus(input.charAt(i)) || esDigito(input.charAt(i)) || esCero(input.charAt(i))) { //si hay guiones que los guarde en el lexema                      
                         lexema = lexema + input.charAt(i);
@@ -131,21 +111,17 @@ public class Analizador_Lexico {
                             agregaTokens(ProporcionalColum(lexema, 0) + "| Identificador     | Int                   | " + identificador++);
                             return ("id");
                         } else {
-
                             lexema = lexema + input.charAt(i);
                             System.out.println("Error léxico en:" + lexema);
                             System.exit(0);
                         }
                     }
-
                 case 6:
-
                     if ((input.charAt(i - 1)) == ':' && (input.charAt(i)) == '=') {
                         setI(i + 1);
                         agregaTokens(":=      " + "| Símbolo especial  | Asignación            | " + caracter++ + " ");
                         return (":=");
                         //ASIGNACION PARA PRACTICA 3
-                        
                     } else {
                         i++;
                         setI(i);
@@ -166,10 +142,8 @@ public class Analizador_Lexico {
                         } else {
                             estado = 9;
                         }
-
                     }
                     break;
-
                 case 8:
                     if (esReser(input.charAt(i))) {
                         lexema = lexema + input.charAt(i);
@@ -218,7 +192,6 @@ public class Analizador_Lexico {
                     } else {
                         estado = 11;
                     }
-
                     break;
                 case 11:
                     setI(i);
@@ -226,34 +199,30 @@ public class Analizador_Lexico {
                     agregaTokens(ProporcionalColum(lexema, 0) + "| Número flotante   | Flotante              | 11 ");
                     return ("realliteral");
                 default:
-
             }
-
         }
         return null;
-
     }
 
     boolean esMayus(char c) {
         return c >= 'A' && c <= 'Z';
     }
-
+    
     boolean esMinus(char c) {
         return c >= 'a' && c <= 'z';
     }
-
+    
     boolean esDigito(char c) {
         return c >= '1' && c <= '9';
     }
-
+    
     boolean esCero(char c) {
         return c == '0';
     }
-
+    
     boolean esEspacio(char c) {
         return c == ' ' || c == '\t' || c == '\n';
     }
-
     boolean esFlotante(char c, char m) {
         return c == '.' && m >= '0' && m <= '9';
     }
@@ -289,7 +258,6 @@ public class Analizador_Lexico {
     }
 
     public void agregaTokens(String lexema) {
-
         if (contiene(lexema).equals("")) {
             int m = veces(lexema);
             tokens.add(lexema + "   |    " + m);
@@ -300,7 +268,6 @@ public class Analizador_Lexico {
             String auxm = "    " + Integer.toString(m);
             tokens.add(reemplazar(yaEsta, parts[4], auxm));
         }
-
     }
 
     public String queEs(String lexema) {
@@ -325,9 +292,7 @@ public class Analizador_Lexico {
                 tipo = "Paréntesis que cierra";
                 break;
         }
-
         return tipo;
-
     }
 
     public void impresionTokens() { //9,18,13
@@ -335,15 +300,10 @@ public class Analizador_Lexico {
         for (int x = 0; x < tokens.size(); x++) {
             System.out.println(tokens.get(x));
         }
-
-        
-
     }
 
     private String ProporcionalColum(String lexema, int columna) {//metodo para agregar espacios y al imprimir salga por culomnas
-
         switch (columna) {
-
             case 0:
                 if (lexema.length() < 8) {
                     for (int j = lexema.length(); j < 8; j++) {
@@ -352,7 +312,6 @@ public class Analizador_Lexico {
                     return lexema;
                 }
                 return lexema;
-
             case 1:
                 if (lexema.length() < 8) {
                     for (int j = lexema.length(); j < 8; j++) {
@@ -383,11 +342,9 @@ public class Analizador_Lexico {
         String pala = parts[0];
         for (int j = 0; j < tokens.size(); j++) {
             if ((tokens.get(j)).contains(pala)) {
-                veces = veces + 1;
-               
+                veces = veces + 1;       
             }
         }
-
         return veces + 1;
     }
 
@@ -404,7 +361,6 @@ public class Analizador_Lexico {
             if (comprobar.contains("Identificador") || comprobar.contains("Número flotante") || comprobar.contains("Número entero")) {
                 simbols.add(tokens.get(j));
             }
-
         }
 
         for (int x = 0; x < simbols.size(); x++) {
@@ -418,7 +374,6 @@ public class Analizador_Lexico {
                     x = x - 1;
                 }
             }
-
         }
 
         for (int x = 0; x < simbols.size(); x++) {
@@ -427,7 +382,6 @@ public class Analizador_Lexico {
             String nombre = parts[0].replaceAll(" ", "");
             String tipo = parts[1].replaceAll(" ", "");
             String valatr;
-
             String repe = parts[4].replaceAll(" ", "");
             if (tipo.contains("Identificador")) {
                 valide = parts[3].replaceAll(" ", "");
@@ -439,24 +393,15 @@ public class Analizador_Lexico {
             String lineas = busqueda(nombre);
             simbols.set(x, nombre + " | " + tipo + "  |          " + valide + "         |          " + repe + "    |      "+lineas+"           |  " + valatr);
         }
-
-
-       
 //        for (int x = 0; x < simbols.size(); x++) { //el metodo de fabricio para imprimir
 //            System.out.println(simbols.get(x));
 //        }
         System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
         Table t2 = new Table(simbols,6); //metodo mio pa imprimir
-        
 //        System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
-
         Table t1 = new Table(tokens,5); //el arraylis de token, y el numero de columnas
         Arbol_Sintactico2 as = new Arbol_Sintactico2(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());
-        //Arbol_Sintactico as = new Arbol_Sintactico(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());
-        
-  
-
-//       
+        //Arbol_Sintactico as = new Arbol_Sintactico(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());  
     }
 
     private String busqueda(String nombre) {
@@ -465,9 +410,7 @@ public class Analizador_Lexico {
             FileReader fr = new FileReader("src/recursos/Cadena.txt");
             BufferedReader bf = new BufferedReader(fr);
             long lNumeroLineas = 0;
-            String sCadena;
-            
-
+            String sCadena;           
             while ((sCadena = bf.readLine()) != null) {
                 String[] parts = (sCadena.split(" "));
                 for (String part : parts) {
@@ -481,7 +424,5 @@ public class Analizador_Lexico {
         } catch (IOException ioe) {
         }
         return lineas;
-
     }
-
 }

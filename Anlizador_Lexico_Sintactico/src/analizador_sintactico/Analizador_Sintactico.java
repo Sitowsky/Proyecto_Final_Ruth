@@ -38,17 +38,13 @@ public class Analizador_Sintactico {
     }
 
     private void LLDriver() {
-
         Pila pila = new Pila();      //instanciamos nuestra pila         
         String a = n.tokenizer(cadena, n.getI()); //a sera nuestros tokens de la cadena a probar
         pila.push("inicio"); //colocamos a la pila la produccion inicial 
         String x = pila.peek(); //x sera nuestro ultimo dato ingresado a la pila
-
         while (!pila.empty()) { //mientras la pila no este vacia
-
             System.out.println("x= " + x + ",  a= " + a);
             pila.showStack();//mostrar lo que tiene la pila
-            
             if (isInArray(x, ag.getNoTerminales())) {//si "x" esta en los terminales
                 System.out.println(getRow(x) + ", " + getColumn(a));//pocisiones de la matriz 
                 if (tabla[getRow(x)][getColumn(a)] != 0) {
@@ -74,7 +70,6 @@ public class Analizador_Sintactico {
                     System.out.println("Error sintactico en x = " + x + " y a = " + a);
                     System.exit(0);
                 }
-
             }
             if (pila.empty()) {
                 System.out.println("Tu programa esta escrito correctamente :)");
@@ -83,7 +78,6 @@ public class Analizador_Sintactico {
             }
             System.out.println("------------------------");
         }
-
     }
 
     private int getRow(String x) {

@@ -18,7 +18,6 @@ public class Code_Intermedio {
                 n.crearC(cadena);
             }
         }
-
     }
 
     public void crearC(String g) throws IOException {
@@ -30,7 +29,6 @@ public class Code_Intermedio {
         writeinFile(g + "\n");
         String[] simbols = g.split(" ");
         String equal = simbols[simbols.length - 1];
-
         for (String simbol : simbols) {
             if (simbol.equals("+") || simbol.equals("-") || simbol.equals("*") || simbol.equals("/") || simbol.equals("=")) {
                 if ((listaInt.size()) >= 2) {
@@ -66,7 +64,6 @@ public class Code_Intermedio {
                 listaInt.push(simbol);
             }
         }
-
     }
 
     public void writeinFile(String c) throws IOException {
@@ -75,7 +72,5 @@ public class Code_Intermedio {
         try (FileWriter f2 = new FileWriter(archivo, true)) {
             f2.write(c);
         }
-
     }
-
 }

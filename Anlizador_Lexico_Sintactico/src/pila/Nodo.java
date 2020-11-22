@@ -13,5 +13,4 @@ public class Nodo {
         
         return dato;
     }
-    
 }

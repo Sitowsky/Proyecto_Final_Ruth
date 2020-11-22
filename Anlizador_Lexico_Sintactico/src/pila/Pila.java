@@ -49,29 +49,21 @@ public class Pila {
     }
 
     public String peek() {//retornar el dato del ultimo elemento añadido a la pila
-
         Nodo actual;
         actual = inicio;
-
         if (inicio != null) {
             return actual.dato;
-
         } else {
-            System.out.print("\nLa pila se encuentra vacía\n");
-            
+            System.out.print("\nLa pila se encuentra vacía\n");   
         }
         return actual.dato;
     }
     
-    public void pop(){//quitar el ultimo elemento añadido a la pila
-        
+    public void pop(){//quitar el ultimo elemento añadido a la pila    
         Nodo actual;
-        actual = inicio;
-        
+        actual = inicio;     
         inicio = actual.siguiente;
         actual.siguiente = null;
-        tamaño--;
-        
+        tamaño--;      
     }
-
 }
