@@ -8,7 +8,6 @@ public class precedencia {
     precedencia(int i, String string) {
         setValue(i);
         setSimbol(string);
-        
     }
 
     public int getKm() {

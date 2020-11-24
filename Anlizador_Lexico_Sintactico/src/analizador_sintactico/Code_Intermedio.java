@@ -47,7 +47,6 @@ public class Code_Intermedio {
                     cadenita = cadenita + " " + variables.peek();
                     writeinFile(cadenita + "\n");
                 } else if ((variables.size()) >= 2 && listaInt.empty()) {
-
                     cadenita = simbol + " " + variables.peek();
                     variables.pop();
                     cadenita = cadenita + " " + variables.peek();

@@ -14,7 +14,6 @@ public class Pila {
     public void push(String s) { //colocar en la pila 
         Nodo nuevo = new Nodo();
         nuevo.dato = s;
-
         nuevo.siguiente = inicio;
         inicio = nuevo;
         tamaño++;

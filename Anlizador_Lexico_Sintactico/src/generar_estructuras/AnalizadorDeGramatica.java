@@ -66,7 +66,6 @@ public class AnalizadorDeGramatica {
                 terminales[z] = s;//Pasamos la información contenida del arrayList al array estatico
                 z++;
             }
-
             System.out.println("");
             System.out.println("Derivaciones(Lado derecho)");
             for (String derivacione : derivaciones) {

@@ -23,7 +23,6 @@ public class Arbol_Sintactico2 {
         Expresion(tokens, simbols_table, tipos);
         Code_Intermedio n = new Code_Intermedio();
         n.crear();
-        
     }
 
     public void Expresion(String[][] tokens, ArrayList<String> simbols_table, ArrayList tipos) throws IOException {// construiremos toda nuestra linea de expresion 
@@ -65,8 +64,6 @@ public class Arbol_Sintactico2 {
             }
         }
         bw.close();
-        
-        
         String ruta2 = "src/recursos/Expresiones.txt";
         File archivo2 = new File(ruta2);
         BufferedWriter bw2;
@@ -83,9 +80,6 @@ public class Arbol_Sintactico2 {
         }
         bw2.close();
     }
-
-
-//
 
 public void Validacion(String[][] tokens, ArrayList<String> simbols_table, String expresion, int desde, int hasta, ArrayList tipos) {
         int n = 0;
@@ -119,7 +113,6 @@ public void Validacion(String[][] tokens, ArrayList<String> simbols_table, Strin
         for (int i = 0; i < variables.length; i++) {
             if (i == 0) {
                 tipeFinal = variables[i];//el primer termino sera nuestro valor final , dado que es el primero
-
             } else {
                 tipeFinal = comprobacionTipos(tipeFinal, variables[i]);
             }

@@ -20,6 +20,6 @@ public class LexicoSintactico {
         a.comenzar();
         long fin = System.nanoTime();//variable de fin time
         double tiempoEjecucion = (double)(fin - inicio) * 1.0e-9; //nanosegundos a segundos , 1nanos = 1e-9s
-        System.out.println("EL TIEMPO DE EJECUCION ES "+tiempoEjecucion);
+        System.out.println("EL TIEMPO DE EJECUCION ES "+ tiempoEjecucion);
     }
 }
