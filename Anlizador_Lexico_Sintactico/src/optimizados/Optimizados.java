@@ -5,12 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-/**
- *
- * @author fabri
- */
 public class Optimizados {
 
     ArrayList optimizar, listos;
@@ -28,15 +23,13 @@ public class Optimizados {
     public static void main(String[] args) {
         Optimizados o = new Optimizados();
         o.run();
-
     }
 
-    public void run() {
-
+    void run() {
         optimizar(lectura());
     }
 
-    public ArrayList lectura() {
+    ArrayList lectura() {
         try {
             archivo = new File("src\\recursos\\cuad.txt");
             fr = new FileReader(archivo);
@@ -58,7 +51,7 @@ public class Optimizados {
 
     }
 
-    public void optimizar(ArrayList optimiza) {
+    void optimizar(ArrayList optimiza) {
         for (Object optimizando : optimiza) {
             String analiza = optimizando.toString();
             String[] partes = analiza.split(" ");
@@ -78,7 +71,7 @@ public class Optimizados {
                     listos.add(analiza);
                 }
 
-            }else{
+            } else {
                 listos.add(analiza);
             }
         }
