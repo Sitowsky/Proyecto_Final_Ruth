@@ -175,6 +175,7 @@ public class Analizador_Lexico {
                         System.out.println("Error léxico en:" + lexema);
                         System.exit(0);
                     }
+                break;
                 case 9:
                     setI(i);
                     agregaTokens(ProporcionalColum(lexema, 0) + "| Número entero     | Int                   | 10 ");
@@ -193,7 +194,7 @@ public class Analizador_Lexico {
                     setI(i);
                     agregaTokens(ProporcionalColum(lexema, 0) + "| Número flotante   | Flotante              | 11 ");
                     return ("realliteral");
-                default:
+                default: break;
             }
         }
         return null;
@@ -388,9 +389,7 @@ public class Analizador_Lexico {
             String lineas = busqueda(nombre);
             simbols.set(x, nombre + " | " + tipo + "  |          " + valide + "         |          " + repe + "    |      "+lineas+"           |  " + valatr);
         }
-//        for (int x = 0; x < simbols.size(); x++) { //el metodo de fabricio para imprimir
-//            System.out.println(simbols.get(x));
-//        }
+//        for (int x = 0; x < simbols.size(); x++) { //el metodo de fabricio para imprimirSystem.out.println(simbols.get(x));}
         System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
         Table t2 = new Table(simbols,6); //metodo mio pa imprimir >>>de fab  System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
         Table t1 = new Table(tokens,5); //el arraylis de token, y el numero de columnas
