@@ -10,10 +10,7 @@ public class Arbol_Sintactico2 {
 
     ArrayList<String> simbols_table_new = new ArrayList<>();
     ArrayList tipos = new ArrayList();
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_RESET = "\u001B[0m";
+    //public static final String ANSI_RED = "\u001B[31m"; public static final String ANSI_BLUE = "\u001B[34m";public static final String ANSI_GREEN = "\u001B[32m";public static final String ANSI_RESET = "\u001B[0m";
     private final ArrayList expresiones;
 
     public Arbol_Sintactico2(String[][] tokens, String[][] simbols, ArrayList<String> simbols_table) throws IOException {

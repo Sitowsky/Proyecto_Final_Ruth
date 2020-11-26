@@ -1,7 +1,9 @@
 package analisis_lexico;
+
 import java.util.ArrayList;
 
 public class Table {
+
     String matriz[][];
     int colum_tam;
     ArrayList<String> simbols_table = new ArrayList<>();
@@ -17,8 +19,7 @@ public class Table {
     }
 
     private void separar(ArrayList<String> simbols, int x) {
-//        System.out.println("guardando en la matriz..........\n");
-        int colum = 0, fila = 0, filas = matriz.length;
+        int colum = 0, fila = 0, filas = matriz.length;//System.out.println("guardando en la matriz..........\n");
         for (int j = 0; j < filas; j++) {
             for (int i = 0; i < x; i++) {/// el numero sera , el numero de columnas que tendra
                 String[] parts = (simbols.get(fila)).split("\\|");
@@ -34,16 +35,13 @@ public class Table {
         int fila = 0, colum = 0;
         for (int i = 0; i < matriz[0].length; i++) { //columna 
             for (int j = 0; j < matriz.length; j++) { //fila
-                if (colum == 0) { //si es colum =0 ya que sera el metodo add
-//                    determinar_tam_colum(colum);
+                if (colum == 0) { //si es colum =0 ya que sera el metodo add, determinar_tam_colum(colum);
                     String parte = matriz[fila][colum];
                     simbols_table.add(fila, agregar_aSimbols(parte, determinar_tam_colum(colum)) + " | ");
-//                    System.out.println(simbols_table.get(fila));
                 } else if (colum > 0) {//si ya se ha agregado algo en esa fila, ahora con el metodo set la sustituiremos             
                     String parte = matriz[fila][colum]; //esta cadena gaurdara todo lo anterior para no perder los datos anteriores
                     String cadena = simbols_table.get(fila) + agregar_aSimbols(parte, determinar_tam_colum(colum)) + " | ";
                     simbols_table.set(fila, cadena);
-//                System.out.println(simbols_table.get(fila));
                 }
                 fila++;
             }
@@ -55,19 +53,16 @@ public class Table {
     private int determinar_tam_colum(int colum) { //nos determina el numero(int) mayor de la columna
         int fila = 0, tamaño = 0;
         for (int j = 0; j < matriz.length; j++) { //checaremos terminos por columna para daterminar el tamaño maypr del elemento
-//            System.out.println("a ver" +fila +","+colum);
             int tam = matriz[fila][colum].length();
             if (tam > tamaño) {
                 tamaño = tam;
             }
-//            System.out.println("el tamaño va "+ matriz[fila][colum]);
             fila++;
         }
         return tamaño;
     }
 
-    private String agregar_aSimbols(String parte, int colum_tamaño) { //le agrega los espacios n
-        //ecesarios para que esta justificado
+    private String agregar_aSimbols(String parte, int colum_tamaño) { //le agrega los espacios necesarios para que esta justificado
         String aux = parte;
         if (parte.length() < colum_tamaño) {
             for (int i = parte.length(); i < colum_tamaño; i++) {
@@ -75,7 +70,7 @@ public class Table {
             }
             return aux; //si el termino es menor que el termino mayor , osea standar de espacios
 
-        } else //        System.out.println("parte"+parte);
+        } else //  System.out.println("parte"+parte);
         {
             return parte;//se refiere al termino mayor , no necesita agregarle espacios
         }
@@ -92,8 +87,8 @@ public class Table {
     String[][] arrayGet() {
         return matriz;
     }
-    
-    ArrayList<String> arrayListGet(){
-    return simbols_table;
+
+    ArrayList<String> arrayListGet() {
+        return simbols_table;
     }
 }

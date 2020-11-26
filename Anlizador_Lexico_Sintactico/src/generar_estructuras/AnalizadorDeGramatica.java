@@ -66,27 +66,22 @@ public class AnalizadorDeGramatica {
                 terminales[z] = s;//Pasamos la información contenida del arrayList al array estatico
                 z++;
             }
-            System.out.println("");
-            System.out.println("Derivaciones(Lado derecho)");
+            System.out.println("\nDerivaciones(Lado derecho)");
             for (String derivacione : derivaciones) {
                 System.out.println(derivacione);
             }
-            System.out.println("");
-            System.out.println("Terminales");
+            System.out.println("\nTerminales");
             for (String terminale : terminales) {
                 System.out.println(terminale);
             }
-            System.out.println("");
-            System.out.println("No Terminales");
+            System.out.println("\nNo Terminales");
             for (String noTerminale : noTerminales) {
                 System.out.println(noTerminale);
             }
-            System.out.println("-.--------.---------");
-            System.out.println("");
+            System.out.println("-.--------.---------\n");
 
         } catch (IOException e) {
         }
-
     }
 
     private static boolean isInArray(String word, String[] array) {

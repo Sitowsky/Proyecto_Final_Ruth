@@ -8,8 +8,7 @@ import java.io.IOException;
 public class LexicoSintactico {
 
     public static void main(String[] args)throws IOException {
-        //medir tiempo
-        long inicio = System.nanoTime();//variable de inicio time
+        long inicio = System.nanoTime();//>>>medir tiempo<<<,variable de inicio time
         BufferedReader br = new BufferedReader(new FileReader("src/recursos/Cadena.txt")); //leer el programa a probar
         String line;
         String cadena = "";

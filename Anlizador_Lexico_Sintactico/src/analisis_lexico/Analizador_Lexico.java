@@ -106,8 +106,6 @@ public class Analizador_Lexico {
                     } else {
                         if (esEspacio(input.charAt(i)) == true || esCaracter(input.charAt(i)) == true) {
                             setI(i);
-                            //a ver pa que aparescan ordenados en la tabla 
-//     FAB                       agregaTokens(lexema+ "|   Identificador   |    Int | " +identificador++ );
                             agregaTokens(ProporcionalColum(lexema, 0) + "| Identificador     | Int                   | " + identificador++);
                             return ("id");
                         } else {
@@ -126,7 +124,6 @@ public class Analizador_Lexico {
                         i++;
                         setI(i);
                         String tipo = queEs(lexema);
-//  FAB                      agregaTokens(lexema+ "  |   Símbolo especial  |    "+tipo+"  | " +caracter++ );
                         agregaTokens(ProporcionalColum(lexema, 0) + "| Símbolo especial  | " + tipo + " | " + caracter++ + " ");
                         return (lexema);
                     }
@@ -180,7 +177,6 @@ public class Analizador_Lexico {
                     }
                 case 9:
                     setI(i);
-// FAB                   agregaTokens(lexema+ "|    Número entero  |    Int  |  10 " );
                     agregaTokens(ProporcionalColum(lexema, 0) + "| Número entero     | Int                   | 10 ");
                     return ("intliteral");
                 case 10:
@@ -195,7 +191,6 @@ public class Analizador_Lexico {
                     break;
                 case 11:
                     setI(i);
-//   FAB                 agregaTokens(lexema+ "|    Número flotante  |    Flotante  |  11 " );
                     agregaTokens(ProporcionalColum(lexema, 0) + "| Número flotante   | Flotante              | 11 ");
                     return ("realliteral");
                 default:
@@ -397,11 +392,9 @@ public class Analizador_Lexico {
 //            System.out.println(simbols.get(x));
 //        }
         System.out.println("NOMBRE        TIPO         VALOR  REP  LÍNEA ATRIBUTO");
-        Table t2 = new Table(simbols,6); //metodo mio pa imprimir
-//        System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
+        Table t2 = new Table(simbols,6); //metodo mio pa imprimir >>>de fab  System.out.println("LEXEMA  |  TOKEN           |   TIPO              |VALOR|REP");
         Table t1 = new Table(tokens,5); //el arraylis de token, y el numero de columnas
-        Arbol_Sintactico2 as = new Arbol_Sintactico2(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());
-        //Arbol_Sintactico as = new Arbol_Sintactico(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());  
+        Arbol_Sintactico2 as = new Arbol_Sintactico2(t1.arrayGet(),t2.arrayGet(),t2.arrayListGet());  
     }
 
     private String busqueda(String nombre) {
