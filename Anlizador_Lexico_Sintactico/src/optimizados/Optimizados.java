@@ -71,8 +71,6 @@ public class Optimizados {
                     listos.add(analiza);
                 }
 
-            } else {
-                listos.add(analiza);
             }
         }
         listos.forEach((item) -> {

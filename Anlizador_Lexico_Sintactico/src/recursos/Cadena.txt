@@ -1,5 +1,5 @@
 program begin
- Precio := 58.5 + ( 3212.2 + 53.25 - 90 + 0 - 30 - 0 + 0 );
- Precio2 := 32 * 3.25 + Por + 0 - 1; 
- Precio4 := Precio + 2 ;
+ Precio := 58 + ( 3212 + 53 - 90 + 0 - 30 - 0 + 0 );
+ Precio2 := 32 * 3 + 0 - 1; 
+ Precio3 := Precio + 2 ;
 end
