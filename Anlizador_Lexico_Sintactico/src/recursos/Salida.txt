@@ -1,18 +1,16 @@
 NOMBRE        TIPO        VALOR  REP  LÍNEA   ATRIBUTO
-58      | Númeroentero  | 58   | 1 | 2,       | 58   | 
-3212    | Númeroentero  | 3212 | 1 | 2,       | 3212 | 
-53      | Númeroentero  | 53   | 1 | 2,       | 53   | 
-90      | Númeroentero  | 90   | 1 | 2,       | 90   | 
-0       | Númeroentero  | 0    | 4 | 2,2,2,3, | 0    | 
-30      | Númeroentero  | 30   | 1 | 2,       | 30   | 
-0       | Númeroentero  | 0    | 4 | 2,2,2,3, | 0    | 
-0       | Númeroentero  | 0    | 4 | 2,2,2,3, | 0    | 
-Precio  |      Int    | 500  | 2 | 2,4,     | 0    | 
-32      | Númeroentero  | 32   | 1 | 3,       | 32   | 
-3       | Númeroentero  | 3    | 1 | 3,       | 3    | 
-0       | Númeroentero  | 0    | 4 | 2,2,2,3, | 0    | 
-1       | Númeroentero  | 1    | 1 |          | 1    | 
-Precio2 |      Int    | 501  | 1 | 3,       | 0    | 
-Precio  | Identificador | 500  | 2 | 2,4,     | 0    | 
-2       | Númeroentero  | 2    | 1 | 4,       | 2    | 
-Precio3 |      Int    | 502  | 1 | 4,       | 0    | 
+58      | Númeroentero  | 58   | 1 | 2,     | 58   | 
+3212    | Númeroentero  | 3212 | 1 | 2,     | 3212 | 
+53      | Númeroentero  | 53   | 1 | 2,     | 53   | 
+90      | Númeroentero  | 90   | 1 | 2,     | 90   | 
+0       | Númeroentero  | 0    | 3 | 2,2,2, | 0    | 
+30      | Númeroentero  | 30   | 1 | 2,     | 30   | 
+0       | Númeroentero  | 0    | 3 | 2,2,2, | 0    | 
+0       | Númeroentero  | 0    | 3 | 2,2,2, | 0    | 
+Precio  |      Int    | 500  | 2 | 2,3,   | 0    | 
+Precio  | Identificador | 500  | 2 | 2,3,   | 0    | 
+2       | Númeroentero  | 2    | 1 | 3,     | 2    | 
+Precio2 |      Int    | 501  | 2 | 3,4,   | 0    | 
+Precio2 | Identificador | 501  | 2 | 3,4,   | 0    | 
+1       | Númeroentero  | 1    | 1 | 4,     | 1    | 
+Precio3 |      Int    | 503  | 1 | 4,     | 0    | 

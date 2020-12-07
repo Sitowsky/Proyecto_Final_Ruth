@@ -9,12 +9,28 @@
 + v2 v1 v1
 = v1 Precio Precio
 
-32 3 * 0 + 1 - = Precio2
-* 3 32 v1
-+ 0 v1 v1
-- 1 v1 v1
+Precio 2 + = Precio2
++ 2 Precio v1
 = v1 Precio2 Precio2
 
-Precio 2 + = Precio3
-+ 2 Precio v1
+Precio2 1 + = Precio3
++ 1 Precio2 v1
+= v1 Precio3 Precio3
+
+58 3212 53 + 90 - 0 + 30 - 0 - 0 + + = Precio
++ 53 3212 v1
+- 90 58 v2
++ 0 v2 v2
+- 30 v2 v2
+- 0 v2 v2
++ 0 v2 v2
++ v2 v1 v1
+= v1 Precio Precio
+
+Precio 2 * = Precio2
+* 2 Precio v1
+= v1 Precio2 Precio2
+
+Precio2 1 + = Precio3
++ 1 Precio2 v1
 = v1 Precio3 Precio3
